@@ -64,7 +64,7 @@ import { compile } from 'mathjs';
  *
  * @example
  * // Uso con métodos de ChuspaNumeric
- * import { biseccion } from 'ChuspaNumeric';
+ * import { biseccion } from 'chuspanumeric';
  * const f = parsearExpresion('x^3 - x - 1');
  * const res = biseccion({ f, a: 1, b: 2 });
  */

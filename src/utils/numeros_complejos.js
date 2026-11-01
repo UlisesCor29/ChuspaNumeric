@@ -1,6 +1,6 @@
 /**
  * @file numeros_complejos.js
- * @description Utilidades básicas para operar con números complejos en Trazo.
+ * @description Utilidades básicas para operar con números complejos en ChuspaNumeric.
  *
  * Un número complejo se representa como un objeto plano { re, im } donde:
  * - `re` es la parte real (número)
@@ -48,7 +48,7 @@ function _validarComplejo(z, nombre) {
     !isFinite(z.im)
   ) {
     throw new ErrorParametros(
-      `Trazo.numeros_complejos: "${nombre}" debe ser un objeto { re, im } con ` +
+      `ChuspaNumeric.numeros_complejos: "${nombre}" debe ser un objeto { re, im } con ` +
       `valores numéricos finitos. Se recibió: ${JSON.stringify(z)}.`
     );
   }
@@ -169,7 +169,7 @@ export function divisionComplejos(z1, z2) {
 
   if (denominador === 0) {
     throw new ErrorParametros(
-      'Trazo.divisionComplejos: el denominador es el complejo cero { re: 0, im: 0 }. ' +
+      'ChuspaNumeric.divisionComplejos: el denominador es el complejo cero { re: 0, im: 0 }. ' +
       'La división por cero no está definida.'
     );
   }
