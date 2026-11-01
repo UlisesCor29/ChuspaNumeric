@@ -6,11 +6,11 @@ Este directorio contiene un script de Google Apps Script que permite usar métod
 
 | Función en Sheets | Método de ChuspaNumeric | Descripción |
 |---|---|---|
-| `=CHUSPANUMERIC_BISECCION(func, a, b)` | `biseccion` | Raíz de f en [a, b] |
-| `=CHUSPANUMERIC_NEWTON(func, x0)` | `newtonRaphson` | Raíz de f a partir de x0 |
-| `=CHUSPANUMERIC_TRAPECIO(func, a, b, n)` | `trapecio` | Integral de f en [a, b] con n subintervalos |
-| `=CHUSPANUMERIC_BISECCION_ITERS(func, a, b)` | `biseccion` | Número de iteraciones usadas |
-| `=CHUSPANUMERIC_LISTA_FUNCIONES()` | — | Lista las funciones matemáticas disponibles |
+| `=TRAZO_BISECCION(func, a, b)` | `biseccion` | Raíz de f en [a, b] |
+| `=TRAZO_NEWTON(func, x0)` | `newtonRaphson` | Raíz de f a partir de x0 |
+| `=TRAZO_TRAPECIO(func, a, b, n)` | `trapecio` | Integral de f en [a, b] con n subintervalos |
+| `=TRAZO_BISECCION_ITERS(func, a, b)` | `biseccion` | Número de iteraciones usadas |
+| `=TRAZO_LISTA_FUNCIONES()` | — | Lista las funciones matemáticas disponibles |
 
 ---
 
@@ -31,7 +31,7 @@ Este directorio contiene un script de Google Apps Script que permite usar métod
 
 ### 3. Autorizar el script
 
-La primera vez que uses una función `CHUSPANUMERIC_*`, Google pedirá autorización:
+La primera vez que uses una función `TRAZO_*`, Google pedirá autorización:
 
 1. Aparecerá un mensaje en la celda: *"Se está calculando..."* seguido de un diálogo de autorización.
 2. Haz clic en **Revisar permisos**.
@@ -46,7 +46,7 @@ La primera vez que uses una función `CHUSPANUMERIC_*`, Google pedirá autorizac
 Ahora puedes usar las funciones en cualquier celda:
 
 ```
-=CHUSPANUMERIC_BISECCION("x2_menos_4", 0, 3)
+=TRAZO_BISECCION("x2_menos_4", 0, 3)
 ```
 
 ---
@@ -57,41 +57,41 @@ Ahora puedes usar las funciones en cualquier celda:
 
 ```
 # Raíz de x² - 4 en [0, 3] → resultado: 2
-=CHUSPANUMERIC_BISECCION("x2_menos_4", 0, 3)
+=TRAZO_BISECCION("x2_menos_4", 0, 3)
 
 # Raíz de x³ - 2x - 5 en [2, 3] → resultado: ≈ 2.0946
-=CHUSPANUMERIC_BISECCION("x3_menos_2x_menos_5", 2, 3)
+=TRAZO_BISECCION("x3_menos_2x_menos_5", 2, 3)
 
 # Raíz de cos(x) - x con punto inicial 1 → resultado: ≈ 0.7391
-=CHUSPANUMERIC_NEWTON("cos_menos_x", 1)
+=TRAZO_NEWTON("cos_menos_x", 1)
 
 # Usando ID numérico en lugar del nombre
-=CHUSPANUMERIC_BISECCION(1, 0, 3)    → raíz de x² - 4
+=TRAZO_BISECCION(1, 0, 3)    → raíz de x² - 4
 
 # Con tolerancia personalizada
-=CHUSPANUMERIC_BISECCION("x2_menos_4", 0, 3, 0.0001)
+=TRAZO_BISECCION("x2_menos_4", 0, 3, 0.0001)
 ```
 
 ### Integración numérica
 
 ```
 # ∫₀¹ x² dx = 1/3 ≈ 0.3333
-=CHUSPANUMERIC_TRAPECIO("x2", 0, 1, 100)
+=TRAZO_TRAPECIO("x2", 0, 1, 100)
 
 # ∫₀^π sin(x) dx = 2
-=CHUSPANUMERIC_TRAPECIO("sin_x", 0, 3.14159, 200)
+=TRAZO_TRAPECIO("sin_x", 0, 3.14159, 200)
 ```
 
 ### Ver cuántas iteraciones usó bisección
 
 ```
-=CHUSPANUMERIC_BISECCION_ITERS("x2_menos_4", 0, 3, 0.000001)
+=TRAZO_BISECCION_ITERS("x2_menos_4", 0, 3, 0.000001)
 ```
 
 ### Ver qué funciones están disponibles
 
 ```
-=CHUSPANUMERIC_LISTA_FUNCIONES()
+=TRAZO_LISTA_FUNCIONES()
 ```
 
 ---
@@ -111,7 +111,7 @@ El catálogo incluye las siguientes funciones. Úsalas por nombre (string) o por
 | — | `log_x` | ln(x) | 1 |
 | — | `exp_menos_x` | e⁻ˣ | — (para integración) |
 
-Para ver la lista completa desde la hoja: `=CHUSPANUMERIC_LISTA_FUNCIONES()`
+Para ver la lista completa desde la hoja: `=TRAZO_LISTA_FUNCIONES()`
 
 ### Agregar una función nueva
 
@@ -124,7 +124,7 @@ var CATALOGO = {
 };
 ```
 
-Luego puedes usar `=CHUSPANUMERIC_BISECCION("mi_funcion", 1, 2)` inmediatamente.
+Luego puedes usar `=TRAZO_BISECCION("mi_funcion", 1, 2)` inmediatamente.
 
 ---
 
@@ -167,7 +167,7 @@ Las cuentas gratuitas de Google tienen un límite de 6 minutos de tiempo de ejec
 | Característica | ChuspaNumeric (npm / Node.js) | Este script (Apps Script) |
 |---|---|---|
 | Instalación | `npm install chuspanumeric` | Copiar y pegar en Apps Script |
-| Uso | `import { biseccion } from 'chuspanumeric'` | `=CHUSPANUMERIC_BISECCION(...)` en celda |
+| Uso | `import { biseccion } from 'chuspanumeric'` | `=TRAZO_BISECCION(...)` en celda |
 | Funciones disponibles | Todas (20+ métodos) | Las del catálogo (ampliable) |
 | Agregar función matemática | Pasar función JS | Editar `CATALOGO` en el script |
 | Actualización | `npm update chuspanumeric` | Actualización manual del script |
